@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASD</title>
+    <link rel="stylesheet" href="scss/style.css" />
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <div class="cursorFollow"></div>
+    <div class="title">ASDSSSSS</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+    let cursor = $(".cursor");
+    let cursorFollow = $(".cursorFollow");
+    let title = $(".title");
+    $(window).on("mousemove", function(e) {
+        console.log("mousemove");
+        gsap.to(cursor, {
+            x: e.clientX - cursor.width() / 2,
+            y: e.clientY - cursor.height() / 2,
+            duration: 0.2,
+        });
+        gsap.to(cursorFollow, {
+            x: e.clientX - cursorFollow.width() / 2,
+            y: e.clientY - cursorFollow.height() / 2,
+            duration: 0.4,
+        });
+    });
+    title.on("mouseenter", function() {
+        cursorFollow.addClass("active");
+    });
+    title.on("mouseleave", function() {
+        cursorFollow.removeClass("active");
+    });
+    const tl = gsap.timeline({
+        delay: 2,
+    });
+    tl.to([title, cursor, cursorFollow], {
+        duration: 2,
+        autoAlpha: 1,
+    });
+    tl.play();
+</script>
+
+</html>
